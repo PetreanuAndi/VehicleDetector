@@ -17,28 +17,25 @@ Methods for computing HOG can be gound both in "hogFeatureExtractor.py" and in "
 The ladder serves as the main functionality file in the project.
 "readDataset.py" is used to extract the images from the car/noncar dataset with glob functionality.
 
-![alt text][image1]
-![alt text][image2]
-
 Initially, I computed hog for sub-samples of images, taken from the sliding window search.
 The lectures provided helped me optimise this process by computing HOG on the entire image and then subsampling the HOG mask. (along with hist and spatial features). This part can be found in "extractEntireHogMap(image,scale)" method, in vehicleDetector.py
-
-
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
+![alt text][image1]
+![alt text][image2]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+####2. HOG parameters
 
-Starting with the suggested parameters, i tried different combinations of hog_channels, spatial_size, orientation and color space for both training the classifier and for predicting the output of the SVM. 
+Starting with the suggested parameters, I tried different combinations of hog_channels, spatial_size, orientation and color space for both training the classifier and for predicting the output of the SVM. 
 
 While a variation of this parameter space gave me the best SVM accuracy (0.997), i had to experiment further in order to get it to work best at the resolution that i was using when predicting with sliding window. 
 
-My final parameter space is : color_space = 'YCrCb',orient=9,pix_per_cell=8,cell_per_block=2,hog_channel='ALL',spatial_size=(64,64),hist_bins=64, spatial_feat=True,hist_feat=True,hog_feat=True,window=64
+My final parameter space is : color_space = 'YCrCb',orient=9,pix_per_cell=8,cell_per_block=2,hog_channel='ALL',spatial_size=(64,64),hist_bins=64, spatial_feat=True,hist_feat=True,hog_feat=True,window=64 => accuracy of 0.994
 
-This seemes to work best with a heat_map threshold of 2 and at 3 different scales : 1.0 / 1.5 / 2.0 over a window of 64.
+This seemes to work best with a heat_map threshold of 2, combined at 3 different scales : 1.0 / 1.5 / 2.0 over a window of 64.
 
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
