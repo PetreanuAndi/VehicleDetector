@@ -38,14 +38,14 @@ My final parameter space is : color_space = 'YCrCb',orient=9,pix_per_cell=8,cell
 This seemes to work best with a heat_map threshold of 2, combined at 3 different scales : 1.0 / 1.5 / 2.0 over a window of 64.
 
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+####3. Classifier
 
 I trained a linear SVM using 3 feature vectors (spatial, hist and hog) in "vehicleDetector.py" and as a test in "classifier.py"
 While the training and testing times were pretty large, i saved the model (classifier/scaler) in pickles and would only recompute when i did not find those files in root folder.
 
 I had an interesting issue while reading with cv2.imread. I did not realise at first that i was training on BGR and then testing on RGB (converting all to YCrCb) and it did not perform very well. This issue killed a lot of my time on the project, and i realised it by mistake basically.
 
-###Sliding Window Search
+###4. Sliding Window Search
 
 Sliding window search is implemented in "hogFeatureExtractor.py" under a method with the same name.
 I only performed the search in the lower half /right half of the image, because that was the relevant space where cars appeared and i had less windows to go through => better solution iterations.
@@ -54,7 +54,7 @@ While the window size remains fixed at 64, i used different scales for the image
 
 ![alt text][image3]
 
-### Video Implementation
+###5. Video Implementation
 
 I used the callback functionality of moviepy.editor - VideoFileClip library and performed all the pipeline steps inside of "process_image(img)"
 Here's a [link to my video result](./output.mp4)
@@ -63,7 +63,7 @@ False positives were removed as a result of the heat_map thresholding. I experim
 
 ---
 
-###Discussion
+###6. Further improvements
 
 I think that the feature extractor of (hog/hist and spatial features) can be easily replaced with a CNN like VGG and then on top of that one can apply a SVM to differentiate between positives and negatives. This way, the CNN will learn its own filters and features, probably much more complex and less time consuming than HOG
 
