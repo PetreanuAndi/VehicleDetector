@@ -6,10 +6,13 @@
 [image2]: ./output_images/NotCar_features.png
 [image3]: ./output_images/img_7.jpg
 [image4]: ./output_images/heat_6.jpg
+[image5]: ./output_images/vehicleDetector.jpg
 [video1]: ./output.mp4
  
 
 ---
+
+![alt text][image5]
 
 ###Histogram of Oriented Gradients (HOG)
 
