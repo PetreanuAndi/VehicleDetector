@@ -68,6 +68,8 @@ Here's a [link to my video result](./output.mp4)
 
 False positives were removed as a result of the heat_map thresholding. I experimented with various thresholding parameters, but found that larger values would segment my output quite badly. I used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap
 
+For the frames where the boxes would dissapear completely, i keept a "prev_label" variable in order to fill in the flickering frames.
+
 ---
 
 ###6. Further improvements
