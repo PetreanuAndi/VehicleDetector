@@ -57,6 +57,10 @@ While the window size remains fixed at 64, i used different scales for the image
 
 ![alt text][image3]
 
+HeatMap : 
+
+![alt text][image4]
+
 ###5. Video Implementation
 
 I used the callback functionality of moviepy.editor - VideoFileClip library and performed all the pipeline steps inside of "process_image(img)"
